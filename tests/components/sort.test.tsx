@@ -7,11 +7,13 @@ describe("<Sort/>", () => {
     render(<Sort onSort={() => {}} />);
     expect(screen.getByLabelText("Sort By:")).toBeInTheDocument();
     expect(screen.getByLabelText("Sort Order:")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Apply Sort" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Apply Sort" }),
+    ).toBeInTheDocument();
   });
 
   it("should apply sort on button click", () => {
-    const applySortMock = () => {}; 
+    const applySortMock = () => {};
     render(<Sort onSort={applySortMock} />);
     fireEvent.click(screen.getByRole("button", { name: "Apply Sort" }));
     // After running the function

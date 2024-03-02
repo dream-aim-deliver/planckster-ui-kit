@@ -13,13 +13,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     <div className={styles.searchBarContainer}>
       <input
         type="text"
-        placeholder="Enter the text"
+        placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         className={styles.input}
       />
       <button onClick={search} className={styles.button}>
-        🔍
+        Search
       </button>
     </div>
   );

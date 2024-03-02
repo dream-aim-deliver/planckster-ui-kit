@@ -14,12 +14,7 @@ export const useSortStore = create<SortState>((set) => ({
   setSortBy: (sortBy) => set({ sortBy }),
   setSortOrder: (sortOrder) => set({ sortOrder }),
   applySort: () => {
-    // Assuming `applySort` function applies the sorting and calls `onSort` callback
-    // with sortBy and sortOrder.
     set((state) => {
-      // Access state.sortBy and state.sortOrder
-      // get to replaDo not force onSort with the actual function
-      // onSort(state.sortBy, state.sortOrder);
       return state;
     });
   },

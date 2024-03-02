@@ -10,10 +10,9 @@ describe("<SearchBar/>", () => {
   });
 
   it("should perform search on button click", () => {
-    const searchMock = () => {}; // Mock function
+    const searchMock = () => {};
     render(<SearchBar onSearch={searchMock} />);
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
-    // Ensure your custom mock function gets called
-    // Add your assertion here if necessary
+    // After running the function
   });
 });

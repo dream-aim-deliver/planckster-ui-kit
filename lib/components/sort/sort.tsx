@@ -21,7 +21,6 @@ const Sort: React.FC<SortProps> = ({ onSort }) => {
       >
         <option value="date">Date</option>
         <option value="name">Name</option>
-        {/* Add more options as needed */}
       </select>
       <label htmlFor="sortOrder">Sort Order:</label>
       <select
@@ -34,7 +33,7 @@ const Sort: React.FC<SortProps> = ({ onSort }) => {
         <option value="desc">Descending</option>
       </select>
       <button onClick={applySort} className={styles.button}>
-        Apply
+        Apply Sort
       </button>
     </div>
   );
