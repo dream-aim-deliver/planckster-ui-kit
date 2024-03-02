@@ -1,16 +1,16 @@
-import create from 'zustand';
+import create from "zustand";
 
 interface SortState {
   sortBy: string;
-  sortOrder: 'asc' | 'desc';
+  sortOrder: "asc" | "desc";
   setSortBy: (sortBy: string) => void;
-  setSortOrder: (sortOrder: 'asc' | 'desc') => void;
+  setSortOrder: (sortOrder: "asc" | "desc") => void;
   applySort: () => void;
 }
 
 export const useSortStore = create<SortState>((set) => ({
-  sortBy: 'date',
-  sortOrder: 'asc',
+  sortBy: "date",
+  sortOrder: "asc",
   setSortBy: (sortBy) => set({ sortBy }),
   setSortOrder: (sortOrder) => set({ sortOrder }),
   applySort: () => {
@@ -20,7 +20,7 @@ export const useSortStore = create<SortState>((set) => ({
       // Access state.sortBy and state.sortOrder
       // get to replaDo not force onSort with the actual function
       // onSort(state.sortBy, state.sortOrder);
-      return state
+      return state;
     });
   },
 }));

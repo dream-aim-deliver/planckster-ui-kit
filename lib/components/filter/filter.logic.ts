@@ -1,5 +1,5 @@
-import create from 'zustand';
-import { combine } from 'zustand/middleware';
+import create from "zustand";
+import { combine } from "zustand/middleware";
 
 interface FilterState {
   startDate: Date | null;
@@ -8,8 +8,6 @@ interface FilterState {
   setEndDate: (endDate: Date | null) => void;
   applyFilter: () => void;
 }
-
-
 
 export const useFilterStore = create<FilterState>((set) => ({
   startDate: null,

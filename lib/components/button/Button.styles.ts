@@ -1,8 +1,11 @@
 import { twMerge } from "tailwind-merge";
 
 export const primary = twMerge(
-  `text-3xl bg-primary text-white`,
-  `hover:bg-blue-700`,
+  `px-6 py-2 bg-blue-500 text-white rounded-md`,
+  `hover:bg-blue-600`,
 );
 
-export const secondary = twMerge(`bg-gray-500 text-white`, `hover:bg-gray-700`);
+export const secondary = twMerge(
+  `px-6 py-2 bg-gray-500 text-white rounded-md`,
+  `hover:bg-gray-600`,
+);
