@@ -2,15 +2,17 @@ import { expect, describe, it } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ConversationPage } from "@/components/conversationpage";
 
-describe("<ConversationPage />", () => {
-  it("should render the ConversationPage component", () => {
+describe("ConversationPage", () => {
+  it("renders with the correct title", async () => {
     render(<ConversationPage />);
-    expect(screen.getByText("Conversations")).toBeInTheDocument();
+    const pageTitle = screen.getByText("Conversations");
+    expect(pageTitle).toBeTruthy();
   });
-
-  it("should add a new conversation on button click", () => {
+  it("opens modal when 'New Conversation' button is clicked", async () => {
     render(<ConversationPage />);
-    fireEvent.click(screen.getByText("+ New Conversation"));
-    // Add assertions here to verify that a new conversation is added
+    const addButton = screen.getByText("+ New Conversation");
+    fireEvent.click(addButton);
+    const modal = screen.getByText("Create New Conversation");
+    expect(modal).toBeTruthy();
   });
 });

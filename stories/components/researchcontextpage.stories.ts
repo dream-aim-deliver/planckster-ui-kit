@@ -1,11 +1,9 @@
-// cardpage.stories.ts
-
 import { Meta, StoryObj } from "@storybook/react";
-import { CardPage } from "@/components/cardpage"; // Adjust the import path as needed
+import { ResearchContextPage } from "@/components/researchcontextpage"; 
 
 const meta: Meta = {
-  title: "Components/CardPage",
-  component: CardPage,
+  title: "Components/researchcontextpage",
+  component: ResearchContextPage,
 };
 
 export default meta;

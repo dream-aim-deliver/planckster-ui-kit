@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Sort } from "@/components/sort"; // Replace with the actual path to your TextInput component
+import { Sort } from "@/components/sort";
 
 const meta: Meta = {
   title: "",

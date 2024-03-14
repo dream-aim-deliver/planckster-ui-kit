@@ -1,5 +1,3 @@
-// cardpage.styles.ts
-
 export const cardPageContainer = `
   max-w-screen-lg mx-auto p-8 flex flex-col items-center
 `;
