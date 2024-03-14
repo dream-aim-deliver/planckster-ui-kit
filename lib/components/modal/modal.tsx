@@ -19,7 +19,7 @@ const Modal: React.FC<ModalProps> = ({
     addConversation(name, description);
     setName("");
     setDescription("");
-    closeModal(); 
+    closeModal();
   };
 
   return (

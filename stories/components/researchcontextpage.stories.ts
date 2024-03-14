@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ResearchContextPage } from "@/components/researchcontextpage"; 
+import { ResearchContextPage } from "@/components/researchcontextpage";
 
 const meta: Meta = {
   title: "Components/researchcontextpage",
