@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Chatheader } from "@/components/chatheader";
+import { ChatHeader } from "@/components/chatheader";
 
-const meta: Meta<typeof Chatheader> = {
-  component: Chatheader,
-  title: "Components/Chatheader",
+const meta: Meta<typeof ChatHeader> = {
+  component: ChatHeader,
+  title: "Components/ChatHeader",
   argTypes: {
     logoSrc: { control: "text" },
     logoAlt: { control: "text" },
@@ -11,7 +11,7 @@ const meta: Meta<typeof Chatheader> = {
   },
 };
 
-type NavbarStory = StoryObj<typeof Chatheader>;
+type NavbarStory = StoryObj<typeof ChatHeader>;
 
 export const Default: NavbarStory = {
   args: {

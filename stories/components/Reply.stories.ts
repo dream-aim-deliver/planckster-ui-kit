@@ -12,7 +12,7 @@ export default ReplyMeta;
 export const Default: StoryObj<ReplyProps> = {
   args: {
     senderName: "User 1",
-    senderImage: "https://example.com/user1.jpg",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
     message: "This is a sample reply message.",
     sentTime: "2:30 PM",
   },
@@ -21,7 +21,7 @@ export const Default: StoryObj<ReplyProps> = {
 export const WithDeliveredStatus: StoryObj<ReplyProps> = {
   args: {
     senderName: "User 2",
-    senderImage: "https://example.com/user2.jpg",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
     message: "Another reply message with delivered status.",
     sentTime: "3:45 PM",
     isDelivered: true,
@@ -31,7 +31,7 @@ export const WithDeliveredStatus: StoryObj<ReplyProps> = {
 export const WithReplyReference: StoryObj<ReplyProps> = {
   args: {
     senderName: "User 3",
-    senderImage: "https://example.com/user3.jpg",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
     message: "Replying to the previous message.",
     sentTime: "4:15 PM",
     repliedToId: "123", //the id is to be taken from backend

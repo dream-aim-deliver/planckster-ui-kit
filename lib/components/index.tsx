@@ -1,1 +1,1 @@
-export { default as ChatScreen } from "./Chatscreen";
+export { default as ChatScreen } from "./ChatScreen";
