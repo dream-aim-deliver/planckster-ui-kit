@@ -5,3 +5,7 @@ import { afterEach } from "vitest";
 afterEach(() => {
   cleanup();
 });
+// Manually add scrollIntoView to HTMLElement.prototype
+if (!window.HTMLElement.prototype.scrollIntoView) {
+  window.HTMLElement.prototype.scrollIntoView = function () {};
+}
