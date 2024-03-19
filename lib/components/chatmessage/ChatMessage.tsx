@@ -5,8 +5,8 @@ export interface ChatMessageProps {
   senderImage: string;
   message: string;
   sentTime: string;
-  isDelivered?: boolean; //  prop for delivered status
-  repliedToId?: string; //  prop for ID of replied-to message
+  isDelivered?: boolean; // prop for delivered status
+  repliedToId?: string; // prop for ID of replied-to message
   role?: "user" | "llm"; // prop for specifying alignment
 }
 
@@ -91,7 +91,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           {repliedToId && repliedToMessage && (
             <ReplyReference repliedToMessage={repliedToMessage} />
           )}
-          <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+          <p
+            className="text-sm font-normal py-2.5 text-gray-900 dark:text-white"
+            style={{ wordWrap: "break-word" }}
+          >
             {message}
           </p>
           {isDelivered && (
