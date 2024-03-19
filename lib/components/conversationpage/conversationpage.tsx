@@ -54,11 +54,7 @@ const ConversationPage: React.FC<ConversationPageProps> = ({ convs }) => {
 
       <div className="grid justify-center gap-4 mt-8">
         {conversations.map((conversation) => (
-          <Card
-            key={conversation.id}
-            id={conversation.id}
-            title={conversation.title}
-          />
+          <Card id={conversation.id} title={conversation.title} />
         ))}
       </div>
       <Modal
