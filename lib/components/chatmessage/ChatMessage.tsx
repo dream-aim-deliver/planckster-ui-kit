@@ -26,13 +26,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   repliedToId,
   role = "user", // default to "user" role if not specified
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [repliedToMessage, setRepliedToMessage] = useState<Message | null>(
     null,
   );
-
-  const handleOpenDropdown = () => setIsOpen(!isOpen);
-  const handleCloseDropdown = () => setIsOpen(false);
 
   // Fetch replied-to message details (when backend connected)
   useEffect(() => {
@@ -63,9 +59,6 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   // Determine message container background color based on role prop
   const messageContainerClass =
     "bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700 border border-gray-200"; // Use same background color for both roles
-
-  // Determine dropdown menu position based on role prop
-  const dropdownPosition = role === "user" ? "right-full" : "left-full";
 
   return (
     <div className={`flex ${containerClass}`}>
@@ -103,76 +96,6 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
             </span>
           )}
         </div>
-        <button
-          type="button"
-          className={`absolute top-0 ${dropdownPosition} inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600`}
-          onClick={handleOpenDropdown}
-          aria-haspopup="true"
-          aria-expanded={isOpen}
-        >
-          <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 4 15"
-          >
-            <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-          </svg>
-        </button>
-        {isOpen && (
-          <div
-            className={`absolute top-0 ${dropdownPosition} mt-2 z-10 w-40 rounded-lg shadow bg-white dark:bg-gray-700`}
-          >
-            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={handleCloseDropdown}
-                >
-                  Reply
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={handleCloseDropdown}
-                >
-                  Forward
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={handleCloseDropdown}
-                >
-                  Copy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={handleCloseDropdown}
-                >
-                  Report
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={handleCloseDropdown}
-                >
-                  Delete
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
       </div>
       {role === "user" && (
         <img
