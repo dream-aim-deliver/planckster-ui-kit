@@ -39,3 +39,9 @@ export const Default: StoryObj<ChatPageProps> = {
     ],
   },
 };
+
+export const NoMessages: StoryObj<ChatPageProps> = {
+  args: {
+    chatMessageProps: [], // Empty array for no messages
+  },
+};
