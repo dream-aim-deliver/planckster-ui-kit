@@ -1,1 +1,1 @@
-export { default as ResearchContextPage } from "./researchcontextpage";
+export { default as ResearchContextPage } from "./ResearchContextPage";

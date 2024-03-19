@@ -58,29 +58,13 @@ const Modal: React.FC<ModalProps> = ({
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Name
+                  Title
                 </label>
                 <input
                   id="name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Description
-                </label>
-                <textarea
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  rows={3}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                   required
                 />

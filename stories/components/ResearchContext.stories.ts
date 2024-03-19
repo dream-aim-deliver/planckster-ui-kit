@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ConversationPage } from "@/components/ConversationPage";
+import { ResearchContextPage } from "@/components/ResearchContextPage";
 
 const meta: Meta = {
-  title: "Components/ConversationPage",
-  component: ConversationPage,
+  title: "Components/ResearchContextPage",
+  component: ResearchContextPage,
 };
 
 export default meta;
@@ -12,17 +12,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    convs: [
-      { id: "1", title: "Conversation 1" },
-      { id: "2", title: "Conversation 2" },
-      { id: "3", title: "Conversation 3" },
+    cards: [
+      { id: 1, title: "Canada wildfire" },
+      { id: 2, title: "Climate change effects" },
+      { id: 3, title: "Renewable energy sources" },
     ],
   },
 };
-
-export const WithManyConversations: Story = {
+export const WithManyContexts: Story = {
   args: {
-    convs: [
+    cards: [
       {
         id: 3948887085,
         title: "AzOc5jIYjLyCNnZU9KzUMgR7MxM0cHtVouoFaTYovv1bJU89lJ4E6AqJwD30o",
