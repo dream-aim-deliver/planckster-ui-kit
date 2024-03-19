@@ -1,7 +1,6 @@
 import { expect, describe, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { ResearchContextPage } from "@/components/ResearchContextPage";
-
+import { ResearchContextPage } from "@/components/researchcontextpage";
 describe("ResearchContextPage", () => {
   it("renders with the correct title", async () => {
     render(

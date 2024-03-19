@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "@/components/card";
 import { Navbar } from "../navbar";
-import * as styles from "./ResearchContextPage.styles";
+import * as styles from "./researchcontextpage.styles";
 import { useState, useEffect } from "react";
 import axios from "axios";
 interface CardData {

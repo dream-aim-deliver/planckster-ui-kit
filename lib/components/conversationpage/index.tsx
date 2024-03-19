@@ -1,1 +1,1 @@
-export { default as ConversationPage } from "./ConversationPage";
+export { default as ConversationPage } from "@/components/ConversationPage/ConversationPage";
