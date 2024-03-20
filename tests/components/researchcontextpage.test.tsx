@@ -1,9 +1,17 @@
-import { expect, describe, it } from "vitest";
+import { expect, describe, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ResearchContextPage } from "@/components/researchcontextpage";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { act } from "react-dom/test-utils";
+
+const onClickCallback: () => boolean = () => {
+  return true;
+};
+
+const mocks = {
+  onClickCallback,
+};
 
 describe("ResearchContextPage", () => {
   it("renders with the correct title", async () => {
@@ -13,11 +21,11 @@ describe("ResearchContextPage", () => {
       .reply(200, [{ id: "1", title: "Test Conversation" }]);
 
     await act(async () => {
-      // Wrap state updates in act
       render(
         <ResearchContextPage
           cards={[{ id: "1", title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
+          onAddContextClick={() => {}}
         />,
       );
     });
@@ -33,11 +41,11 @@ describe("ResearchContextPage", () => {
       .reply(200, [{ id: "1", title: "Test Conversation" }]);
 
     await act(async () => {
-      // Wrap state updates in act
       render(
         <ResearchContextPage
           cards={[{ id: "1", title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
+          onAddContextClick={() => {}}
         />,
       );
     });
@@ -56,17 +64,36 @@ describe("ResearchContextPage", () => {
       .reply(200, { id: "2", title: "New Test Conversation" });
 
     await act(async () => {
-      // Wrap state updates in act
       render(
         <ResearchContextPage
           cards={[{ id: "1", title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
+          onAddContextClick={() => {}}
         />,
       );
     });
     const addButton = screen.getByText("+ New Research Context");
     fireEvent.click(addButton);
-    const modal = screen.getByText("Create New Research Context"); // Assuming modal text
+
+    const modal = screen.getByText("Create New Research Context");
     expect(modal).toBeTruthy();
+  });
+
+  it("ensures onClick is called", async () => {
+    const onAddContextClick = vi.spyOn(mocks, "onClickCallback");
+
+    await act(async () => {
+      render(
+        <ResearchContextPage
+          cards={[{ id: "1", title: "Test Conversation" }]}
+          apiUrl="/api/researchcontexts"
+          /* eslint-disable @typescript-eslint/no-explicit-any */
+          onAddContextClick={onAddContextClick as any}
+        />,
+      );
+    });
+    const addButton = screen.getByText("+ New Research Context");
+    fireEvent.click(addButton);
+    expect(onAddContextClick).toHaveBeenCalledTimes(1);
   });
 });

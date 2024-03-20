@@ -1,9 +1,17 @@
-import { expect, describe, it } from "vitest";
+import { expect, describe, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ConversationPage } from "@/components/conversationpage";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { act } from "react-dom/test-utils";
+
+const onClickCallback: () => boolean = () => {
+  return true;
+};
+
+const mocks = {
+  onClickCallback,
+};
 
 describe("ConversationPage", () => {
   it("renders with the correct title", async () => {
@@ -18,6 +26,7 @@ describe("ConversationPage", () => {
         <ConversationPage
           convs={[{ id: "1", title: "Test Conversation" }]}
           apiUrl="/api/conversations"
+          onAddConversationClick={() => {}}
         />,
       );
     });
@@ -41,6 +50,7 @@ describe("ConversationPage", () => {
         <ConversationPage
           convs={[{ id: "1", title: "Test Conversation" }]}
           apiUrl="/api/conversations"
+          onAddConversationClick={() => {}}
         />,
       );
     });
@@ -49,5 +59,23 @@ describe("ConversationPage", () => {
     fireEvent.click(addButton);
     const modal = screen.getByText("Create New Conversation"); // Assuming modal text
     expect(modal).toBeTruthy();
+  });
+
+  it("ensures onClick is called", async () => {
+    const onAddConversationClick = vi.spyOn(mocks, "onClickCallback");
+
+    await act(async () => {
+      render(
+        <ConversationPage
+          convs={[{ id: "1", title: "Test Conversation" }]}
+          apiUrl="/api/conversations"
+          /* eslint-disable @typescript-eslint/no-explicit-any */
+          onAddConversationClick={onAddConversationClick as any}
+        />,
+      );
+    });
+    const addButton = screen.getByText("+ New Conversation");
+    fireEvent.click(addButton);
+    expect(onAddConversationClick).toHaveBeenCalledTimes(1);
   });
 });
