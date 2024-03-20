@@ -12,11 +12,13 @@ interface Conversation {
 interface ConversationPageProps {
   convs: Conversation[];
   apiUrl: string;
+  onAddConversationClick: () => void;
 }
 
 const ConversationPage: React.FC<ConversationPageProps> = ({
   convs,
   apiUrl,
+  onAddConversationClick,
 }) => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -71,7 +73,10 @@ const ConversationPage: React.FC<ConversationPageProps> = ({
         addConversation={addConversation}
       />
       <button
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          setShowModal(true);
+          onAddConversationClick();
+        }}
         className="fixed bottom-10 right-10 z-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         + New Conversation
