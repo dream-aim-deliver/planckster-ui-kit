@@ -1,10 +1,10 @@
 import React from "react";
 
 interface NavbarProps {
-  activePage: string; // Prop to indicate the active page
+  role?: "Research Context" | "Conversations" | "About Us";
 }
 
-const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
+const Navbar: React.FC<NavbarProps> = ({ role }) => {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -20,7 +20,6 @@ const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
           />
         </a>
         <div className="flex md:order-2">
-          {/* Search bar and icon */}
           <div className="relative hidden md:block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
@@ -52,38 +51,30 @@ const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-search"
         >
-          {/* Your search input and menu */}
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              {/* Conditional styling based on active page */}
               <a
                 href="#"
-                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${activePage === "Research Context" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
-                aria-current={
-                  activePage === "Research Context" ? "page" : undefined
-                }
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${role === "Research Context" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
+                aria-current={role === "Research Context" ? "page" : undefined}
               >
                 Research Context
               </a>
             </li>
             <li>
-              {/* Conditional styling based on active page */}
               <a
                 href="#"
-                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${activePage === "Conversations" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
-                aria-current={
-                  activePage === "Conversations" ? "page" : undefined
-                }
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${role === "Conversations" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
+                aria-current={role === "Conversations" ? "page" : undefined}
               >
                 Conversations
               </a>
             </li>
             <li>
-              {/* Conditional styling based on active page */}
               <a
                 href="#"
-                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${activePage === "About Us" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
-                aria-current={activePage === "About Us" ? "page" : undefined}
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${role === "About Us" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
+                aria-current={role === "About Us" ? "page" : undefined}
               >
                 About Us
               </a>
@@ -96,3 +87,4 @@ const Navbar: React.FC<NavbarProps> = ({ activePage }) => {
 };
 
 export default Navbar;
+export type { NavbarProps };

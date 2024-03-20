@@ -11,9 +11,13 @@ interface Conversation {
 
 interface ConversationPageProps {
   convs: Conversation[];
+  apiUrl: string;
 }
 
-const ConversationPage: React.FC<ConversationPageProps> = ({ convs }) => {
+const ConversationPage: React.FC<ConversationPageProps> = ({
+  convs,
+  apiUrl,
+}) => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -21,7 +25,7 @@ const ConversationPage: React.FC<ConversationPageProps> = ({ convs }) => {
     // Fetch conversations from the backend when component mounts
     const fetchConversations = async () => {
       try {
-        const response = await axios.get("/api/conversations");
+        const response = await axios.get(apiUrl);
         setConversations(response.data);
       } catch (error) {
         console.error("Error fetching conversations:", error);
@@ -29,7 +33,7 @@ const ConversationPage: React.FC<ConversationPageProps> = ({ convs }) => {
     };
 
     fetchConversations();
-  }, []);
+  }, [apiUrl]);
 
   useEffect(() => {
     // Update conversations if convs prop changes
@@ -50,7 +54,7 @@ const ConversationPage: React.FC<ConversationPageProps> = ({ convs }) => {
 
   return (
     <div className="conversation-page relative">
-      <Navbar activePage="Conversations" />
+      <Navbar role="Conversations" />
 
       <div className="grid justify-center gap-4 mt-8">
         {conversations.map((conversation) => (
