@@ -36,7 +36,31 @@ export const WithReplyReference: StoryObj<ChatMessageProps> = {
     senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
     message: "Replying to the previous message.",
     sentTime: "4:15 PM",
-    repliedToId: "123", //the id is to be taken from backend
+    repliedToId: "123", // The id is to be taken from the backend
+    role: "user", // Aligning to the left
+  },
+};
+
+export const WithImage: StoryObj<ChatMessageProps> = {
+  args: {
+    senderName: "User 4",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
+    message: "Check out this image!",
+    sentTime: "2:30 PM",
+    image:
+      "https://cdn.britannica.com/90/191790-050-092C8C2A/Wildfire-Stanislaus-National-Forest-California-2013.jpg", // Provide image URL
+    role: "user", // Aligning to the left
+  },
+};
+
+export const WithMarkdownMessage: StoryObj<ChatMessageProps> = {
+  args: {
+    senderName: "User 5",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
+    message:
+      "### Hello Markdown!\n\nThis is a **bold** message with *italics*.",
+    sentTime: "2:00 PM",
+    markdown: true, // Indicate that the message is in Markdown format
     role: "user", // Aligning to the left
   },
 };

@@ -2,8 +2,6 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import ChatPage from "@/components/ChatPage";
 import "@testing-library/jest-dom";
 
-// window.HTMLElement.prototype.scrollIntoView = jest.fn();
-
 describe("ChatPage Component", () => {
   test("renders chat messages correctly", () => {
     const chatMessages = [

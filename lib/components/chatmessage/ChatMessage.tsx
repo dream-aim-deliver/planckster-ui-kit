@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { Image } from "@/components/image";
 
 export interface ChatMessageProps {
   senderName: string;
@@ -8,6 +10,8 @@ export interface ChatMessageProps {
   isDelivered?: boolean; // prop for delivered status
   repliedToId?: string; // prop for ID of replied-to message
   role?: "user" | "llm"; // prop for specifying alignment
+  image?: string; // Optional image URL to be displayed in the message
+  markdown?: boolean; // Optional flag to indicate if the message is in Markdown format
 }
 
 export interface Message {
@@ -25,6 +29,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   isDelivered,
   repliedToId,
   role = "user", // default to "user" role if not specified
+  image,
+  markdown = false,
 }) => {
   const [repliedToMessage, setRepliedToMessage] = useState<Message | null>(
     null,
@@ -84,12 +90,22 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           {repliedToId && repliedToMessage && (
             <ReplyReference repliedToMessage={repliedToMessage} />
           )}
-          <p
-            className="text-sm font-normal py-2.5 text-gray-900 dark:text-white"
-            style={{ wordWrap: "break-word" }}
-          >
-            {message}
-          </p>
+          {markdown ? (
+            <div
+              className="text-sm font-normal py-2.5 text-gray-900 dark:text-white"
+              style={{ wordWrap: "break-word" }}
+            >
+              <ReactMarkdown>{message}</ReactMarkdown>
+            </div>
+          ) : (
+            <p
+              className="text-sm font-normal py-2.5 text-gray-900 dark:text-white"
+              style={{ wordWrap: "break-word" }}
+            >
+              {message}
+            </p>
+          )}
+          {image && <Image src={image} alt="Message Image" />}
           {isDelivered && (
             <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
               Delivered

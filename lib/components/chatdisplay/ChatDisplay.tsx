@@ -1,17 +1,23 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import { Image } from "@/components/image";
 
 interface ChatDisplayProps {
   username: string;
   message: string;
   userImage: string;
   timestamp: string;
+  image?: string; // Optional image URL to be displayed in the chat
+  markdown?: boolean; // Optional flag to indicate if the message is in Markdown format
 }
 
-const ChatDisplayProps: React.FC<ChatDisplayProps> = ({
+const ChatDisplay: React.FC<ChatDisplayProps> = ({
   username,
   message,
   userImage,
   timestamp,
+  image,
+  markdown = false,
 }) => {
   return (
     <div className="bg-lightBlue-100 p-4 rounded-lg">
@@ -27,9 +33,22 @@ const ChatDisplayProps: React.FC<ChatDisplayProps> = ({
             </span>
           </div>
           <div className="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-            <p className="text-sm font-normal text-gray-900 dark:text-white overflow-hidden overflow-ellipsis">
-              {message}
-            </p>
+            {markdown ? (
+              <div
+                className="text-sm font-normal text-gray-900 dark:text-white overflow-hidden overflow-ellipsis"
+                style={{ wordWrap: "break-word" }}
+              >
+                <ReactMarkdown>{message}</ReactMarkdown>
+              </div>
+            ) : (
+              <p
+                className="text-sm font-normal text-gray-900 dark:text-white overflow-hidden overflow-ellipsis"
+                style={{ wordWrap: "break-word" }}
+              >
+                {message}
+              </p>
+            )}
+            {image && <Image src={image} alt="Message Image" />}
           </div>
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
             Sent
@@ -41,4 +60,4 @@ const ChatDisplayProps: React.FC<ChatDisplayProps> = ({
   );
 };
 
-export default ChatDisplayProps;
+export default ChatDisplay;
