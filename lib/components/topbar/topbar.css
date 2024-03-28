@@ -1,0 +1,35 @@
+/* TopBar.css */
+.top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3b7efc;
+    padding: 10px 20px;
+    font-family: monospace;
+  }
+  
+  .left-content img {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .right-content {
+     margin-left:60px ;
+  }
+  
+  .right-content h1 {
+    font-size: 30px;
+    animation: animateText 2s infinite alternate; 
+    margin: 0; 
+  }
+  
+  @keyframes animateText {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
