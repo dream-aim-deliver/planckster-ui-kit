@@ -1,4 +1,7 @@
-const TopBar = () => {
+interface TopBarProps {
+  title: string;
+}
+const TopBar: React.FC<TopBarProps> = ({ title }) => {
   return (
     <div style={topBarStyle}>
       <div style={leftContentStyle}>
@@ -9,9 +12,7 @@ const TopBar = () => {
         />
       </div>
       <div style={rightContentStyle}>
-        <h1 style={headingStyle}>
-          Welcome to Satellite Data Augmentation project
-        </h1>
+        <h1 style={headingStyle}>{title}</h1>
       </div>
     </div>
   );
@@ -29,7 +30,7 @@ const topBarStyle = {
 };
 
 const leftContentStyle = {
-  marginLeft: "60px",
+  marginLeft: "50px",
 };
 
 const logoStyle = {
@@ -39,7 +40,7 @@ const logoStyle = {
 };
 
 const rightContentStyle = {
-  marginLeft: "60px",
+  marginLeft: "40px",
 };
 
 const headingStyle = {
