@@ -18,12 +18,12 @@ describe("ResearchContextPage", () => {
     const mock = new MockAdapter(axios);
     mock
       .onGet("/api/researchcontexts")
-      .reply(200, [{ id: "1", title: "Test Conversation" }]);
+      .reply(200, [{ id: 1, description: "", title: "Test Conversation" }]);
 
     await act(async () => {
       render(
         <ResearchContextPage
-          cards={[{ id: "1", title: "Test Conversation" }]}
+          cards={[{ description: "", id: 1, title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
           onAddContextClick={() => {}}
         />,
@@ -38,12 +38,12 @@ describe("ResearchContextPage", () => {
     const mock = new MockAdapter(axios);
     mock
       .onGet("/api/researchcontexts")
-      .reply(200, [{ id: "1", title: "Test Conversation" }]);
+      .reply(200, [{ id: 1, description: "", title: "Test Conversation" }]);
 
     await act(async () => {
       render(
         <ResearchContextPage
-          cards={[{ id: "1", title: "Test Conversation" }]}
+          cards={[{ description: "", id: 1, title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
           onAddContextClick={() => {}}
         />,
@@ -58,15 +58,15 @@ describe("ResearchContextPage", () => {
     const mock = new MockAdapter(axios);
     mock
       .onGet("/api/researchcontexts")
-      .reply(200, [{ id: "1", title: "Test Conversation" }]);
+      .reply(200, [{ id: 1, description: "", title: "Test Conversation" }]);
     mock
       .onPost("/api/researchcontexts")
-      .reply(200, { id: "2", title: "New Test Conversation" });
+      .reply(200, [{ id: 1, description: "", title: "Test Conversation" }]);
 
     await act(async () => {
       render(
         <ResearchContextPage
-          cards={[{ id: "1", title: "Test Conversation" }]}
+          cards={[{ description: "", id: 1, title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
           onAddContextClick={() => {}}
         />,
@@ -85,7 +85,7 @@ describe("ResearchContextPage", () => {
     await act(async () => {
       render(
         <ResearchContextPage
-          cards={[{ id: "1", title: "Test Conversation" }]}
+          cards={[{ description: "", id: 1, title: "Test Conversation" }]}
           apiUrl="/api/researchcontexts"
           /* eslint-disable @typescript-eslint/no-explicit-any */
           onAddContextClick={onAddContextClick as any}
