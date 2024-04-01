@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { SignUpPage } from "@/components/signup";
 import { TopBar } from "@/components/topbar";
-
-const LoginPage: React.FC = () => {
+// import { title } from "process";
+interface TopBarProps {
+  title: string;
+}
+const LoginPage: React.FC<TopBarProps> = ({ title }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignUp, setShowSignUp] = useState(false);
@@ -25,7 +28,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="dark:bg-slate-800">
-      <TopBar />
+      <TopBar title={title} />
       <div className="flex justify-center items-center h-screen">
         {showSignUp ? (
           <SignUpPage
