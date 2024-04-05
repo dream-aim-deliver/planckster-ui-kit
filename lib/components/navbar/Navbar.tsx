@@ -2,19 +2,9 @@ import React from "react";
 
 interface NavbarProps {
   role?: "Research Context" | "Conversations" | "About Us";
-  darkMode?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ role, darkMode }) => {
-  const navbarClass = darkMode
-    ? "bg-gray-800 border-gray-700"
-    : "bg-white border-gray-200";
-  const textColor = darkMode ? "text-white" : "text-gray-900";
-  const hoverBgColor = darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100";
-  const hoverTextColor = darkMode
-    ? "hover:text-blue-300"
-    : "hover:text-blue-700";
-
+const Navbar: React.FC<NavbarProps> = ({ role }) => {
   return (
     <nav className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
