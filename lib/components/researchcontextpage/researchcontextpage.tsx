@@ -5,8 +5,9 @@ import { Navbar } from "../navbar";
 import { Rcmodal } from "@/components/rcmodal"; // Import the Modal component
 
 interface CardData {
-  id: string;
+  id: number;
   title: string;
+  description: string; // Adding description to CardData
 }
 
 interface ResearchContextPageProps {
@@ -59,9 +60,9 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
         <div className="flex flex-col gap-5">
           {cards.map((card) => (
             <Card
-              id={card.id}
               title={card.title}
-              key={card.id}
+              description={card.description} // Pass description to Card component
+              id={card.id}
               data-testid={`card-${card.id}`}
             />
           ))}

@@ -18,13 +18,13 @@ describe("ConversationPage", () => {
     const mock = new MockAdapter(axios);
     mock
       .onGet("/api/conversations")
-      .reply(200, [{ id: "1", title: "Test Conversation" }]);
+      .reply(200, [{ id: 1, title: "Test Conversation" }]);
 
     await act(async () => {
       // Wrap state updates in act
       render(
         <ConversationPage
-          convs={[{ id: "1", title: "Test Conversation" }]}
+          convs={[{ id: 1, title: "Test Conversation" }]}
           apiUrl="/api/conversations"
           onAddConversationClick={() => {}}
         />,
@@ -39,16 +39,16 @@ describe("ConversationPage", () => {
     const mock = new MockAdapter(axios);
     mock
       .onGet("/api/conversations")
-      .reply(200, [{ id: "1", title: "Test Conversation" }]);
+      .reply(200, [{ id: 1, title: "Test Conversation" }]);
     mock
       .onPost("/api/conversations")
-      .reply(200, { id: "2", title: "New Test Conversation" });
+      .reply(200, { id: 2, title: "New Test Conversation" });
 
     await act(async () => {
       // Wrap state updates in act
       render(
         <ConversationPage
-          convs={[{ id: "1", title: "Test Conversation" }]}
+          convs={[{ id: 1, title: "Test Conversation" }]}
           apiUrl="/api/conversations"
           onAddConversationClick={() => {}}
         />,
@@ -67,7 +67,7 @@ describe("ConversationPage", () => {
     await act(async () => {
       render(
         <ConversationPage
-          convs={[{ id: "1", title: "Test Conversation" }]}
+          convs={[{ id: 1, title: "Test Conversation" }]}
           apiUrl="/api/conversations"
           /* eslint-disable @typescript-eslint/no-explicit-any */
           onAddConversationClick={onAddConversationClick as any}

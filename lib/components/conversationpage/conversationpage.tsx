@@ -5,7 +5,7 @@ import { Modal } from "@/components/modal";
 import { Navbar } from "../navbar";
 
 interface Conversation {
-  id: string;
+  id: number;
   title: string;
 }
 
@@ -60,7 +60,12 @@ const ConversationPage: React.FC<ConversationPageProps> = ({
 
       <div className="grid justify-center gap-4 mt-8">
         {conversations.map((conversation) => (
-          <Card id="" title={conversation.title} key={conversation.id} />
+          <Card
+            id={conversation.id}
+            title={conversation.title}
+            key={conversation.id}
+            description=""
+          />
         ))}
       </div>
       <Modal
