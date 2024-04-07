@@ -1,15 +1,16 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { Modal } from "@/components/modal";
 import { Navbar } from "../navbar";
 
-interface Conversation {
+export interface Conversation {
   id: number;
   title: string;
 }
 
-interface ConversationPageProps {
+export interface ConversationPageProps {
   convs: Conversation[];
   apiUrl: string;
   onAddConversationClick: () => void;

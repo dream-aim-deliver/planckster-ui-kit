@@ -1,16 +1,17 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { Navbar } from "../navbar";
 import { Rcmodal } from "@/components/rcmodal"; // Import the Modal component
 
-interface CardData {
+export interface CardData {
   id: number;
   title: string;
   description: string; // Adding description to CardData
 }
 
-interface ResearchContextPageProps {
+export interface ResearchContextPageProps {
   cards: CardData[];
   apiUrl: string;
   onAddContextClick: () => void;

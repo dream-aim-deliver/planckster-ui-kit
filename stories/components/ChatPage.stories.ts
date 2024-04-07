@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ChatPageProps } from "@/components/ChatPage";
-import ChatPage from "@/components/ChatPage";
+import { ChatPageProps } from "@/components/chatpage/ChatPage";
+import ChatPage from "@/components/chatpage/ChatPage";
 
 const ChatPageMeta: Meta<ChatPageProps> = {
   title: "Components/ChatPage",

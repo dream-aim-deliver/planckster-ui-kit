@@ -1,12 +1,13 @@
+"use client";
 import React, { useState } from "react";
 
-interface ModalProps {
+export interface RcModalProps {
   isOpen: boolean;
   closeModal: () => void;
   addResearchContext: (title: string, description: string) => void;
 }
 
-const Rcmodal: React.FC<ModalProps> = ({
+const Rcmodal: React.FC<RcModalProps> = ({
   isOpen,
   closeModal,
   addResearchContext,
