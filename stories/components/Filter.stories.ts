@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Filter } from "@/components/filter"; // Replace with the actual path to your TextInput component
 
 const meta: Meta = {
-  title: "",
+  title: "Filter",
   component: Filter,
   parameters: {
     layout: "centered",
