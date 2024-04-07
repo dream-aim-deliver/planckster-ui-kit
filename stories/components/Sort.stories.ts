@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Sort } from "@/components/sort"; // Replace with the actual path to your TextInput component
 
 const meta: Meta = {
-  title: "",
+  title: "Sort",
   component: Sort,
   parameters: {
     layout: "centered",
