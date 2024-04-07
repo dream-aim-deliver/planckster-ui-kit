@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ChatDisplayProps {
+export interface ChatDisplayProps {
   username: string;
   message: string;
   userImage: string;

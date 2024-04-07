@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ChatInputProps {
+export interface ChatInputProps {
   onSendMessage: (message: string) => void;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;

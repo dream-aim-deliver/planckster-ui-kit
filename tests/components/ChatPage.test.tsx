@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import ChatPage from "@/components/ChatPage";
+import ChatPage from "@/components/chatpage/ChatPage";
 import "@testing-library/jest-dom";
 
 // window.HTMLElement.prototype.scrollIntoView = jest.fn();

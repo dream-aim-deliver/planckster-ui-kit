@@ -1,7 +1,7 @@
 import React from "react";
 import { useSortStore } from "./sort.logic";
 
-interface SortProps {
+export interface SortProps {
   onSort: (sortBy: string, sortOrder: "asc" | "desc") => void;
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
