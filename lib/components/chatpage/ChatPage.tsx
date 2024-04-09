@@ -1,9 +1,10 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
-import { ChatHeader } from "./chatheader";
-import { ChatMessage } from "./chatmessage";
-import { ChatMessageProps } from "./chatmessage/ChatMessage";
-import { ChatInput } from "./chatinput";
-import ChatDisplayProps from "./chatdisplay/ChatDisplay";
+import { ChatHeader } from "../chatheader";
+import { ChatMessage } from "../chatmessage";
+import { ChatMessageProps } from "../chatmessage/ChatMessage";
+import { ChatInput } from "../chatinput";
+import ChatDisplayProps from "../chatdisplay/ChatDisplay";
 
 export interface ChatPageProps {
   chatMessageProps: ChatMessageProps[];

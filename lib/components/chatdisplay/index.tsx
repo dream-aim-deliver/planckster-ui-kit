@@ -1,1 +1,1 @@
-export { default as ChatDisplay } from "./ChatDisplay";
+export { default as ChatDisplay, type ChatDisplayProps } from "./ChatDisplay";

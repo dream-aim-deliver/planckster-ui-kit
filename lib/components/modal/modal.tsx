@@ -1,6 +1,7 @@
+"use client";
 import React, { useState } from "react";
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
   addConversation: (name: string, description: string) => void;

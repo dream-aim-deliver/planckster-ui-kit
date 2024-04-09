@@ -1,7 +1,7 @@
 import React from "react";
 import { useFilterStore } from "./filter.logic";
 
-interface FilterProps {
+export interface FilterProps {
   onApplyFilter: (startDate: Date, endDate: Date) => void;
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
