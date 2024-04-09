@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { SourceList } from "@/components/sourcelist";
 
 const meta: Meta<typeof SourceList> = {
@@ -8,16 +8,32 @@ const meta: Meta<typeof SourceList> = {
 
 export default meta;
 
-type Story = StoryObj<typeof SourceList>;
-
-const sources = [
-  { name: "Source 1" },
-  { name: "Source 2" },
-  { name: "Source 3" },
+const sampleSources = [
+  {
+    name: "Source 1",
+    protocol: "HTTP",
+    lfn: "/path/to/file1.txt",
+    dateCreated: "2023-05-01",
+  },
+  {
+    name: "Source 2",
+    protocol: "FTP",
+    lfn: "/path/to/file2.txt",
+    dateCreated: "2023-05-02",
+  },
+  // Add more sample sources as needed
 ];
 
-export const Default: Story = {
+export const Default: StoryObj<typeof SourceList> = {
   args: {
-    sources: sources,
+    sources: sampleSources,
+    title: "My Sources",
+  },
+};
+
+export const CustomTitle: StoryObj<typeof SourceList> = {
+  args: {
+    sources: sampleSources,
+    title: "Important Sources",
   },
 };

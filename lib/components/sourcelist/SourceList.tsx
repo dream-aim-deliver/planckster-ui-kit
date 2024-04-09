@@ -9,13 +9,17 @@ import {
 
 interface SourceData {
   name: string;
+  protocol: string;
+  lfn: string;
+  dateCreated: string;
 }
 
 interface SourceListProps {
   sources: SourceData[];
+  title: string;
 }
 
-const SourceList: React.FC<SourceListProps> = ({ sources }) => {
+const SourceList: React.FC<SourceListProps> = ({ sources, title }) => {
   const data = React.useMemo(() => sources, [sources]);
 
   const columns = React.useMemo<ColumnDef<SourceData>[]>(
@@ -23,6 +27,18 @@ const SourceList: React.FC<SourceListProps> = ({ sources }) => {
       {
         accessorKey: "name",
         header: "Name",
+      },
+      {
+        accessorKey: "protocol",
+        header: "Protocol",
+      },
+      {
+        accessorKey: "lfn",
+        header: "LFN",
+      },
+      {
+        accessorKey: "dateCreated",
+        header: "Date Created",
       },
     ],
     [],
@@ -39,7 +55,7 @@ const SourceList: React.FC<SourceListProps> = ({ sources }) => {
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="p-4 bg-white dark:bg-gray-800">
         <div className="text-center font-bold text-[#003366] bg-gray-50 dark:bg-gray-700 dark:text-gray-400 px-6 py-3">
-          SOURCES
+          {title}
         </div>
         <div className="flex justify-end mb-2">
           <div className="relative">
@@ -70,23 +86,16 @@ const SourceList: React.FC<SourceListProps> = ({ sources }) => {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <th
-                  key={headerGroup.id}
-                  colSpan={headerGroup.headers.length}
-                  scope="colgroup"
-                  className="px-6 py-3"
-                >
-                  {headerGroup.headers.map((header) => (
-                    <div key={header.id}>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                    </div>
-                  ))}
-                </th>
-              ))}
+              {table.getHeaderGroups().map((headerGroup) =>
+                headerGroup.headers.map((header) => (
+                  <th key={header.id} className="px-6 py-3">
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+                  </th>
+                )),
+              )}
             </tr>
           </thead>
           <tbody>
