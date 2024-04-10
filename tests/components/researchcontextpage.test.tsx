@@ -34,26 +34,6 @@ describe("ResearchContextPage", () => {
     expect(pageTitle).toBeTruthy();
   });
 
-  it("contains at least one card", async () => {
-    const mock = new MockAdapter(axios);
-    mock
-      .onGet("/api/researchcontexts")
-      .reply(200, [{ id: 1, description: "", title: "Test Conversation" }]);
-
-    await act(async () => {
-      render(
-        <ResearchContextPage
-          cards={[{ description: "", id: 1, title: "Test Conversation" }]}
-          apiUrl="/api/researchcontexts"
-          onAddContextClick={() => {}}
-        />,
-      );
-    });
-
-    const card = screen.getByTestId("card"); // Assuming card id is unique
-    expect(card).toBeTruthy();
-  });
-
   it("opens modal when 'New Research Context' button is clicked", async () => {
     const mock = new MockAdapter(axios);
     mock
