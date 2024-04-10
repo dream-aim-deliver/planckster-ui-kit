@@ -15,7 +15,7 @@ export const Default: StoryObj<ChatMessageProps> = {
     senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
     message: "This is a sample reply message.",
     sentTime: "2:30 PM",
-    role: "user", // Aligning to the left by default
+    role: "user",
   },
 };
 
@@ -26,7 +26,7 @@ export const WithDeliveredStatus: StoryObj<ChatMessageProps> = {
     message: "Another reply message with delivered status.",
     sentTime: "3:45 PM",
     isDelivered: true,
-    role: "llm", // Aligning to the right
+    role: "llm",
   },
 };
 
@@ -36,7 +36,30 @@ export const WithReplyReference: StoryObj<ChatMessageProps> = {
     senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
     message: "Replying to the previous message.",
     sentTime: "4:15 PM",
-    repliedToId: "123", //the id is to be taken from backend
-    role: "user", // Aligning to the left
+    repliedToId: "123",
+    role: "user",
+  },
+};
+
+export const WithMarkdown: StoryObj<ChatMessageProps> = {
+  args: {
+    senderName: "Mark",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
+    message:
+      "## Heading Level 2\n- List item 1\n- List item 2\n`Code snippet here`",
+    sentTime: "5:00 PM",
+    markdown: true,
+    role: "user",
+  },
+};
+
+export const WithImage: StoryObj<ChatMessageProps> = {
+  args: {
+    senderName: "Artist",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
+    message: "This message includes an optional image shown below.",
+    sentTime: "5:30 PM",
+    image: "https://via.placeholder.com/150",
+    role: "user",
   },
 };
