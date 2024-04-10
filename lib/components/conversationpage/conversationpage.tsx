@@ -68,7 +68,11 @@ const ConversationPage: React.FC<ConversationPageProps> = ({
 
   return (
     <div className="conversation-page relative">
-      <Navbar role="Conversations" onSearch={handleSearch} />
+      <Navbar
+        role="Conversations"
+        onSearch={handleSearch}
+        onLogout={() => {}}
+      />
 
       <div className="grid justify-center gap-4 mt-8">
         {/* Render filtered conversations */}

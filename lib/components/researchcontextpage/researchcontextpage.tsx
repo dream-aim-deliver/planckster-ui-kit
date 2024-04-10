@@ -67,7 +67,11 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
 
   return (
     <div>
-      <Navbar role="Research Context" onSearch={handleSearch} />
+      <Navbar
+        role="Research Context"
+        onSearch={handleSearch}
+        onLogout={() => {}}
+      />
       <div className="max-w-screen-lg mx-auto p-8 flex flex-col items-center">
         <div className="flex flex-col gap-5">
           {/* Render filtered cards */}
