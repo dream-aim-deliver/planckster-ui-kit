@@ -4,7 +4,6 @@ export * from "./chatdisplay";
 export * from "./chatheader";
 export * from "./chatinput";
 export * from "./chatmessage";
-export * from "./ChatPage";
 export * from "./modal";
 export * from "./navbar";
 export * from "./rcmodal";
