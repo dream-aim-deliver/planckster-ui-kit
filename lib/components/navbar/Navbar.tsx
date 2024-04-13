@@ -6,16 +6,16 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ role }) => {
   return (
-    <nav className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         {/* Navbar content */}
         <a
           href="https://www.mpi-sws.org/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="https://avatars.githubusercontent.com/u/43347517?s=200&v=4"
-            className="w-16 h-16 ml-10"
+            src="https://www.mpi-sws.org/wp-content/themes/mpi-sws/assets/images/mpi-sws-logo.svg?ver=1.8.2"
+            className="h-8"
             alt="MPI-SWS Logo"
           />
         </a>
@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
           <div className="relative hidden md:block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
-                className="w-4 h-4  text-gray-500 dark:text-gray-400"
+                className="w-4 h-4 text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
             <input
               type="text"
               id="search-navbar"
-              className="block w-full p-2 pl-10 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
             />
           </div>
@@ -51,15 +51,11 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-search"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <a
                 href="#"
-                className={`block py-2 px-3 rounded md:p-6 ${
-                  role === "Research Context"
-                    ? "text-blue-700 dark:text-blue-500"
-                    : "text-gray-900 dark:text-white"
-                } ${role !== "Research Context" ? "hover:text-blue-700 dark:hover:text-blue-300" : ""}`}
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${role === "Research Context" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
                 aria-current={role === "Research Context" ? "page" : undefined}
               >
                 Research Context
@@ -68,11 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
             <li>
               <a
                 href="#"
-                className={`block py-2 px-3 rounded md:p-6 ${
-                  role === "Conversations"
-                    ? "text-blue-700 dark:text-blue-500"
-                    : "text-gray-900 dark:text-white"
-                } ${role !== "Conversations" ? "hover:text-blue-700 dark:hover:text-blue-300" : ""}`}
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${role === "Conversations" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
                 aria-current={role === "Conversations" ? "page" : undefined}
               >
                 Conversations
@@ -81,11 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
             <li>
               <a
                 href="#"
-                className={`block py-2 px-3 rounded md:p-6 ${
-                  role === "About Us"
-                    ? "text-blue-700 dark:text-blue-500"
-                    : "text-gray-900 dark:text-white"
-                } ${role !== "About Us" ? "hover:text-blue-700 dark:hover:text-blue-300" : ""}`}
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 text-gray-900 dark:text-white ${role === "About Us" ? "text-blue-700 md:text-blue-500 dark:hover:text-blue-500" : "text-gray-900 dark:text-white hover:text-blue-700"} `}
                 aria-current={role === "About Us" ? "page" : undefined}
               >
                 About Us

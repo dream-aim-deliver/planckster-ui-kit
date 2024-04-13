@@ -11,5 +11,7 @@ export default meta;
 type Story = StoryObj<NavbarProps>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    role: "About Us",
+  },
 };
