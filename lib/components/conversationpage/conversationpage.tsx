@@ -23,6 +23,7 @@ const ConversationPage: React.FC<ConversationPageProps> = ({
 }) => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     // Fetch conversations from the backend when component mounts
@@ -55,12 +56,27 @@ const ConversationPage: React.FC<ConversationPageProps> = ({
     }
   };
 
+  // Function to handle search query changes
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  // Filtered conversations based on search query
+  const filteredConversations = conversations.filter((conversation) =>
+    conversation.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
     <div className="conversation-page relative">
-      <Navbar role="Conversations" />
+      <Navbar
+        role="Conversations"
+        onSearch={handleSearch}
+        onLogout={() => {}}
+      />
 
       <div className="grid justify-center gap-4 mt-8">
-        {conversations.map((conversation) => (
+        {/* Render filtered conversations */}
+        {filteredConversations.map((conversation) => (
           <Card
             id={conversation.id}
             title={conversation.title}
