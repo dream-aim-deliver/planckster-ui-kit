@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 
 interface SourceData {
+  id: string;
   name: string;
   protocol: string;
   lfn: string;
@@ -17,13 +18,23 @@ interface SourceData {
 interface SourceListProps {
   sources: SourceData[];
   title: string;
+  enableSelection?: boolean;
+  onSelectionChange?: (selectedIds: Record<string, boolean>) => void;
 }
 
-const SourceList: React.FC<SourceListProps> = ({ sources, title }) => {
-  const data = React.useMemo(() => sources, [sources]);
+const SourceList: React.FC<SourceListProps> = ({
+  sources,
+  title,
+  enableSelection = false,
+  onSelectionChange,
+}) => {
+  const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
+  const [globalFilter, setGlobalFilter] = useState("");
 
-  const columns = React.useMemo<ColumnDef<SourceData>[]>(
-    () => [
+  const data = useMemo(() => sources, [sources]);
+
+  const columns = useMemo(() => {
+    const baseColumns: ColumnDef<SourceData>[] = [
       {
         accessorKey: "name",
         header: "Name",
@@ -40,15 +51,63 @@ const SourceList: React.FC<SourceListProps> = ({ sources, title }) => {
         accessorKey: "dateCreated",
         header: "Date Created",
       },
-    ],
-    [],
-  );
+    ];
+
+    if (enableSelection) {
+      return [
+        {
+          id: "selection",
+          header: ({ table }) => (
+            <input
+              type="checkbox"
+              checked={
+                table.getPreFilteredRowModel().rows.length > 0 &&
+                table
+                  .getPreFilteredRowModel()
+                  .rows.every((row) => selectedRows[row.id])
+              }
+              onChange={(e) => {
+                const isChecked = e.target.checked;
+                const newSelectedRows: Record<string, boolean> = {};
+                table.getPreFilteredRowModel().rows.forEach((row) => {
+                  newSelectedRows[row.id] = isChecked;
+                });
+                setSelectedRows(newSelectedRows);
+                onSelectionChange && onSelectionChange(newSelectedRows);
+              }}
+            />
+          ),
+          cell: ({ row }) => (
+            <input
+              type="checkbox"
+              checked={!!selectedRows[row.id]}
+              onChange={() => {
+                const newSelectedRows = {
+                  ...selectedRows,
+                  [row.id]: !selectedRows[row.id],
+                };
+                setSelectedRows(newSelectedRows);
+                onSelectionChange && onSelectionChange(newSelectedRows);
+              }}
+            />
+          ),
+          size: 40,
+        },
+        ...baseColumns,
+      ];
+    }
+
+    return baseColumns;
+  }, [selectedRows, enableSelection, onSelectionChange]);
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      globalFilter,
+    },
   });
 
   return (
@@ -58,14 +117,12 @@ const SourceList: React.FC<SourceListProps> = ({ sources, title }) => {
           {title}
         </div>
         <div className="flex justify-end mb-2">
-          <div className="relative">
+          <div className="relative w-80">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   fillRule="evenodd"
@@ -77,26 +134,26 @@ const SourceList: React.FC<SourceListProps> = ({ sources, title }) => {
             <input
               type="text"
               placeholder="Search Sources"
-              className="block p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={table.getState().globalFilter || ""}
-              onChange={(e) => table.setGlobalFilter(e.target.value)}
+              className="block p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
             />
           </div>
         </div>
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              {table.getHeaderGroups().map((headerGroup) =>
-                headerGroup.headers.map((header) => (
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
                   <th key={header.id} className="px-6 py-3">
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext(),
                     )}
                   </th>
-                )),
-              )}
-            </tr>
+                ))}
+              </tr>
+            ))}
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (

@@ -2,29 +2,44 @@ import React, { useState } from "react";
 import DownloadIcon from "./DownloadIcon";
 
 export interface DownloadButtonProps {
-  //  No specific props for now, but will add later if needed
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  sources: any[];
+  selectedIds: Record<string, boolean>;
 }
 
-const DownloadButton: React.FC = () => {
+const DownloadButton: React.FC<DownloadButtonProps> = ({
+  sources,
+  selectedIds,
+}) => {
   const [isDownloading, setIsDownloading] = useState(false);
 
   const downloadFile = async () => {
     setIsDownloading(true);
 
-    try {
-      const response = await fetch("/your-download-endpoint");
+    const toDownload = sources.filter(
+      (source) =>
+        selectedIds[source.id] || Object.keys(selectedIds).length === 0,
+    );
 
-      //Headers necessary here
+    try {
+      const responses = await Promise.all(
+        toDownload.map((source) => fetch(source.downloadUrl)),
+      );
+      const blobs = await Promise.all(responses.map((res) => res.blob()));
+
+      const combinedBlob = new Blob(blobs, { type: "application/zip" });
       const link = document.createElement("a");
-      link.href = window.URL.createObjectURL(await response.blob()); // Get the raw data
+      link.href = window.URL.createObjectURL(combinedBlob);
+      link.download = "Sources.zip";
       link.style.display = "none";
       document.body.appendChild(link);
 
       link.click();
       document.body.removeChild(link);
+
+      setIsDownloading(false);
     } catch (error) {
       console.error("Download error:", error);
-      // Handle download error
       setIsDownloading(false);
     }
   };

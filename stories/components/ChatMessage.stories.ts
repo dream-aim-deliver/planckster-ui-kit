@@ -63,3 +63,15 @@ export const WithImage: StoryObj<ChatMessageProps> = {
     role: "user",
   },
 };
+
+export const WithBase64Image: StoryObj<ChatMessageProps> = {
+  args: {
+    senderName: "Developer",
+    senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
+    message: "Below is a base64 encoded image of a tiny red dot.",
+    sentTime: "6:00 PM",
+    image:
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+    role: "user",
+  },
+};
