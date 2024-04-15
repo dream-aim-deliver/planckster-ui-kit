@@ -4,16 +4,18 @@ export interface ChatInputProps {
   onSendMessage: (message: string) => void;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  isDisabled?: boolean;
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({
   onSendMessage,
   value,
   onChange,
+  isDisabled = false,
 }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (value.trim() !== "") {
+    if (value.trim() !== "" && !isDisabled) {
       onSendMessage(value);
     }
   };
@@ -34,10 +36,16 @@ const ChatInput: React.FC<ChatInputProps> = ({
           onChange={onChange}
           className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Your message..."
+          disabled={isDisabled}
         ></textarea>
         <button
           type="submit"
-          className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-300 dark:text-blue-500 dark:hover:bg-gray-600 transition-all duration-300 ease-in-out"
+          className={`inline-flex justify-center p-2 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${
+            isDisabled
+              ? "bg-gray-300 dark:bg-gray-600 cursor-not-allowed" // Apply styles when disabled
+              : "text-blue-600 hover:bg-blue-300 dark:text-blue-500 dark:hover:bg-gray-600"
+          }`}
+          disabled={isDisabled}
         >
           <svg
             className="w-5 h-5 rotate-90 rtl:-rotate-90"

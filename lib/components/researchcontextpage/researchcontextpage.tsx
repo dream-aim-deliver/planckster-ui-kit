@@ -64,6 +64,7 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
               title={card.title}
               description={card.description} // Pass description to Card component
               id={card.id}
+              key={card.id}
               data-testid={`card-${card.id}`}
             />
           ))}

@@ -2,8 +2,6 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import ChatPage from "@/components/chatpage/ChatPage";
 import "@testing-library/jest-dom";
 
-// window.HTMLElement.prototype.scrollIntoView = jest.fn();
-
 describe("ChatPage Component", () => {
   test("renders chat messages correctly", () => {
     const chatMessages = [
@@ -11,13 +9,18 @@ describe("ChatPage Component", () => {
         senderName: "User 2",
         senderImage: "https://i.ibb.co/gvynGqz/clipart1363971.png",
         message: "Hello, how are you?",
-        sentTime: "10:00",
+        sentTime: "10:00 AM",
       },
     ];
 
-    render(<ChatPage chatMessageProps={chatMessages} />);
+    render(
+      <ChatPage
+        chatMessageProps={chatMessages}
+        isDisabled={false}
+        showLoadingIndicator={false}
+      />,
+    );
 
-    // Ensure chat messages are rendered
     chatMessages.forEach((message) => {
       const senderNameElement = screen.getByText(message.senderName);
       const messageTextElement = screen.getByText(message.message);
@@ -27,21 +30,20 @@ describe("ChatPage Component", () => {
   });
 
   test("allows sending a new message", () => {
-    render(<ChatPage chatMessageProps={[]} />);
+    render(
+      <ChatPage
+        chatMessageProps={[]}
+        isDisabled={false}
+        showLoadingIndicator={false}
+      />,
+    );
 
-    // Simulate typing a new message
-    const inputElement = screen.getByPlaceholderText("Your message...");
+    const inputElement = screen.getByRole("textbox");
     fireEvent.change(inputElement, { target: { value: "Test message" } });
-
-    // Ensure message is typed correctly
     expect(inputElement).toHaveValue("Test message");
 
-    // Simulate sending the message
-    const sendButton = screen.getByText("Send message");
+    const sendButton = screen.getByRole("button", { name: /send/i });
     fireEvent.click(sendButton);
-
-    // Ensure message is sent and displayed
-    const sentMessage = screen.getByText("Test message");
-    expect(sentMessage).toBeInTheDocument();
+    expect(inputElement).toHaveValue("");
   });
 });

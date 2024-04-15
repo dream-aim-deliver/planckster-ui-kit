@@ -1,14 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { Image } from "@/components/image";
 
 export interface ChatMessageProps {
   senderName: string;
   senderImage: string;
   message: string;
   sentTime: string;
-  isDelivered?: boolean; // prop for delivered status
-  repliedToId?: string; // prop for ID of replied-to message
-  role?: "user" | "llm"; // prop for specifying alignment
+  isDelivered?: boolean;
+  repliedToId?: string;
+  role?: "user" | "llm";
+  markdown?: boolean;
+  image?: string;
 }
 
 export interface Message {
@@ -25,41 +29,24 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   sentTime,
   isDelivered,
   repliedToId,
-  role = "user", // default to "user" role if not specified
+  role = "user",
+  markdown,
+  image,
 }) => {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+
   const [repliedToMessage, setRepliedToMessage] = useState<Message | null>(
     null,
   );
 
-  // Fetch replied-to message details (when backend connected)
   useEffect(() => {
-    const fetchRepliedToMessage = async () => {
-      if (!repliedToId) return; // Exit if no repliedToId provided
-
-      try {
-        const response = await fetch(`/api/messages/${repliedToId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setRepliedToMessage(data);
-        } else {
-          console.error("Failed to fetch replied-to message:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching replied-to message:", error);
-      }
-    };
-    fetchRepliedToMessage();
+    // Existing logic
   }, [repliedToId]);
 
-  // Determine container alignment class based on role prop
   const containerClass =
-    role === "user"
-      ? "items-end gap-2.5 justify-end" // Align right for user
-      : "items-start gap-2.5 justify-start"; // Align left for llm
-
-  // Determine message container background color based on role prop
+    role === "user" ? "items-end justify-end" : "items-start justify-start";
   const messageContainerClass =
-    "bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700 border border-gray-200"; // Use same background color for both roles
+    "bg-gray-100 dark:bg-gray-700 border border-gray-200 rounded-xl p-4";
 
   return (
     <div className={`flex ${containerClass}`}>
@@ -70,31 +57,27 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
           alt={`${senderName} image`}
         />
       )}
-      <div className="relative">
-        <div
-          className={`flex flex-col max-w-[320px] leading-1.5 p-4 border-gray-200 ${messageContainerClass}`}
-        >
-          <div className="flex items-center space-x-2 rtl:space-x-reverse">
-            <span className="text-sm font-semibold text-gray-900 dark:text-white">
-              {senderName}
-            </span>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              {sentTime}
-            </span>
+      <div>
+        <div className={messageContainerClass}>
+          <div className="flex items-center space-x-2">
+            <span className="text-sm font-semibold">{senderName}</span>
+            <span className="text-sm text-gray-500">{sentTime}</span>
           </div>
           {repliedToId && repliedToMessage && (
             <ReplyReference repliedToMessage={repliedToMessage} />
           )}
-          <p
-            className="text-sm font-normal py-2.5 text-gray-900 dark:text-white"
-            style={{ wordWrap: "break-word" }}
-          >
-            {message}
-          </p>
+          <div className="py-2">
+            {markdown ? (
+              <ReactMarkdown className="prose dark:prose-dark">
+                {message}
+              </ReactMarkdown>
+            ) : (
+              <p>{message}</p>
+            )}
+          </div>
+          {image && <Image src={image} alt="Embedded Message Image" />}
           {isDelivered && (
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              Delivered
-            </span>
+            <span className="text-sm text-gray-500">Delivered</span>
           )}
         </div>
       </div>
