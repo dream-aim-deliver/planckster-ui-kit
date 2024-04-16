@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card } from "@/components/card";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { ResearchCard, ResearchCardProps } from "@/components/researchcard";
 import { Navbar } from "../navbar";
-import { Rcmodal } from "@/components/rcmodal"; // Import the Modal component
+import { Rcmodal } from "@/components/rcmodal";
 
 export interface CardData {
   id: number;
@@ -23,11 +24,10 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
   onAddContextClick,
 }) => {
   const [rcontexts, setRContexts] = useState<CardData[]>([]);
-  const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
+  const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    // Fetch data from backend when the component mounts
     const fetchData = async () => {
       try {
         const response = await axios.get(apiUrl);
@@ -36,11 +36,9 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, [apiUrl]);
 
-  // Function to add a new research context
   const addResearchContext = async (title: string, description: string) => {
     try {
       const response = await axios.post("/api/researchcontexts", {
@@ -49,39 +47,45 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
       });
       const newContext: CardData = response.data;
       setRContexts([...rcontexts, newContext]);
-      setShowModal(false); // Close the modal after adding context
+      setShowModal(false);
     } catch (error) {
       console.error("Error adding research context:", error);
     }
   };
 
-  // Function to handle search query changes
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };
 
-  // Filtered cards based on search query
   const filteredCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  const handleSourcesClick = (id: number) => {
+    console.log(`Sources clicked for card with id ${id}`);
+  };
+
+  const handleConversationsClick = (id: number) => {
+    console.log(`Conversations clicked for card with id ${id}`);
+  };
 
   return (
     <div>
       <Navbar role="Research Context" onSearch={handleSearch} />
       <div className="max-w-screen-lg mx-auto p-8 flex flex-col items-center">
         <div className="flex flex-col gap-5">
-          {/* Render filtered cards */}
           {filteredCards.map((card) => (
-            <Card
+            <ResearchCard
               title={card.title}
-              description={card.description} // Pass description to Card component
+              description={card.description}
               id={card.id}
+              onSourcesClick={() => handleSourcesClick(card.id)}
+              onConversationsClick={() => handleConversationsClick(card.id)}
               data-testid={`card-${card.id}`}
             />
           ))}
         </div>
       </div>
-      {/* New Research Context Button */}
       <button
         onClick={() => {
           setShowModal(true);
@@ -91,7 +95,6 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
       >
         + New Research Context
       </button>
-      {/* Modal for adding a new research context */}
       <Rcmodal
         isOpen={showModal}
         closeModal={() => setShowModal(false)}
