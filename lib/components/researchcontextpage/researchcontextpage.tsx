@@ -8,7 +8,7 @@ import { Rcmodal } from "@/components/rcmodal"; // Import the Modal component
 export interface CardData {
   id: number;
   title: string;
-  description: string; // Adding description to CardData
+  description: string;
 }
 
 export interface ResearchContextPageProps {
@@ -24,6 +24,7 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
 }) => {
   const [rcontexts, setRContexts] = useState<CardData[]>([]);
   const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     // Fetch data from backend when the component mounts
@@ -54,12 +55,23 @@ const ResearchContextPage: React.FC<ResearchContextPageProps> = ({
     }
   };
 
+  // Function to handle search query changes
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  // Filtered cards based on search query
+  const filteredCards = cards.filter((card) =>
+    card.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
     <div>
-      <Navbar role="Research Context" />
+      <Navbar role="Research Context" onSearch={handleSearch} />
       <div className="max-w-screen-lg mx-auto p-8 flex flex-col items-center">
         <div className="flex flex-col gap-5">
-          {cards.map((card) => (
+          {/* Render filtered cards */}
+          {filteredCards.map((card) => (
             <Card
               title={card.title}
               description={card.description} // Pass description to Card component

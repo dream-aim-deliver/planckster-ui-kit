@@ -2,9 +2,16 @@ import React from "react";
 
 interface NavbarProps {
   role?: "Research Context" | "Conversations" | "About Us";
+  onSearch: (query: string) => void; // Function to handle search queries
 }
 
-const Navbar: React.FC<NavbarProps> = ({ role }) => {
+const Navbar: React.FC<NavbarProps> = ({ role, onSearch }) => {
+  // Function to handle search query changes
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    onSearch(query);
+  };
+
   return (
     <nav className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
@@ -44,6 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
               id="search-navbar"
               className="block w-full p-2 pl-10 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
+              onChange={handleSearchChange} // Handle search query changes
             />
           </div>
         </div>
@@ -59,7 +67,11 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
                   role === "Research Context"
                     ? "text-blue-700 dark:text-blue-500"
                     : "text-gray-900 dark:text-white"
-                } ${role !== "Research Context" ? "hover:text-blue-700 dark:hover:text-blue-300" : ""}`}
+                } ${
+                  role !== "Research Context"
+                    ? "hover:text-blue-700 dark:hover:text-blue-300"
+                    : ""
+                }`}
                 aria-current={role === "Research Context" ? "page" : undefined}
               >
                 Research Context
@@ -72,7 +84,11 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
                   role === "Conversations"
                     ? "text-blue-700 dark:text-blue-500"
                     : "text-gray-900 dark:text-white"
-                } ${role !== "Conversations" ? "hover:text-blue-700 dark:hover:text-blue-300" : ""}`}
+                } ${
+                  role !== "Conversations"
+                    ? "hover:text-blue-700 dark:hover:text-blue-300"
+                    : ""
+                }`}
                 aria-current={role === "Conversations" ? "page" : undefined}
               >
                 Conversations
@@ -85,7 +101,11 @@ const Navbar: React.FC<NavbarProps> = ({ role }) => {
                   role === "About Us"
                     ? "text-blue-700 dark:text-blue-500"
                     : "text-gray-900 dark:text-white"
-                } ${role !== "About Us" ? "hover:text-blue-700 dark:hover:text-blue-300" : ""}`}
+                } ${
+                  role !== "About Us"
+                    ? "hover:text-blue-700 dark:hover:text-blue-300"
+                    : ""
+                }`}
                 aria-current={role === "About Us" ? "page" : undefined}
               >
                 About Us
